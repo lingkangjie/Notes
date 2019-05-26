@@ -29,7 +29,7 @@ Here file discriptor, 1, 2, 3 is represented standard input, standard ouput, sta
 - tee, read from standard input and write to standard output and files, it is useful for capturing a pipeline' contents at an intermediate stage of processing, `$ls /usr/bin | tee ls.txt | grep zip`, capture the standard output of ls to ls.txt before grep filters the pipeline's contents.
 
 # wildcard
-- * matches any characters
+- \* matches any characters
 - ? matches any single character
 - [characters] matches any character that is member of the set **characters**
 - [!characters] 
