@@ -67,13 +67,37 @@ ok:/home/lkj/data
 ```
 - Which files should we modify for establishing environment? To add directories to your *PATH* of define additional environment variables, place those changes in **.bash_profile**( or **.profile** in Ubuntu). For everything else, place the changes in **.bashrc**.
 - In Nano editor, ^ means Ctrl, such as, ^X means Ctrl-x.
+- cat -A filename, -A show all. -n show number lines, -s suppress the output of multiple blank lines.
+- `ls -l /usr/bin | sort -nrk 5 | head`, -n preform sorting based on the numeric evaluation of a sting, using this option allows sorting to be performed on numeric values rather than alphabetic values. -r --reverse. -k --key=field1[,field2], sort based on a key field located from field1 to field2 rather than the ectire line.
+```
+lkj@lkj:~/tmp/Notes$ ls -l /usr/bin | sort -nrk 5 | head
+-rwxr-xr-x 1 root root    79780856 Jan 24 18:49 dockerd
+-rwxr-xr-x 1 root root    38199680 Jan 24 18:49 docker
+-rwxr-xr-x 1 root root    38158448 Jan 24 18:49 docker-containerd
+-rwxr-xr-x 1 root root    20919664 Jan 24 18:49 docker-containerd-ctr
+-rwxr-xr-x 1 root root    14924104 Mar 12  2018 doxygen
+-rwxr-xr-x 1 root root    12849608 Jan 30 01:50 snap
+-rwxr-xr-x 1 root root    11661624 Jan 24 18:49 docker-runc
+-rwxr-xr-x 1 root root     9074600 Jan 30 01:50 snapctl
+-rwxr-xr-x 1 root root     7602672 Apr  9  2018 gdb
+-rwxr-xr-x 1 root root     6444464 Apr 24  2018 ctest
+```
 
-# wildcard
+# wildcard and regular expressions
 - \* matches any characters
 - ? matches any single character
 - [characters] matches any character that is member of the set **characters**
 - [!characters] 
 - [[:class:]] matches any character that is a member of specifiled class.
-- [:alnum:] matches any alphanumeric character. [:alpha:] matches any alphabetic character. [:digit:] matches any numeral. [:lower:] lowercase. [:upper:] uppercase.
+- [:alnum:] matches any alphanumeric character, equivalent to [A-Za-z0-9]. [:word:], the same as [:alnum:], with the addition of underscore(\_) character. [:alpha:] matches any alphabetic character. [:digit:] matches any numeral. [:lower:] lowercase. [:upper:] uppercase. [:blank:], includes the space and tab characters.
 - [[:upper:]]\* any file beginning with an uppercase letter.
 - \*[[:lower:]123] any file ending with lowercase letter or the numerals 1 2 3.
+- $grep [options] regex [file...]. `options`, -i --ignore-case, ignore uppercase and lowercase characters. -v --invert-match, -c --count print the number of matches instead of the lines themselves. -l --file-with-matches print the name of each file that contains a match instead of the lines themselves. -L --file-without-match. -n --line-number, prefix each matching line with the number of the line within the file. -h --no-filename, for multi-file searchs, suppress the output of filenames.
+```
+$ grep -h '.zip' dirlist-*.txt (any character)
+$ grep -h '^zip' dirlist-*.txt (beginning of the line)
+$ grep -h 'zip$' dirlist-*.txt (end of the line)
+$ grep -n '^$' dirlist-*.txt (will match blank lines)
+$ grep -h '^[A-Za-z0-9]' dirlist-*.txt
+```
+
