@@ -1,6 +1,5 @@
-## EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks
-> Authors: Mingxing Tan, Quoc V.Le
-> Notes by Lingkangjie, 2019-06-04
+## [EfficientNet](https://arxiv.org/abs/1905.11946): Rethinking Model Scaling for Convolutional Neural Networks
+> Authors: Mingxing Tan, Quoc V.Le. Notes by Lingkangjie, 2019-06-04
 
 The authors use neural architecture search  method to design a new baseline network and scale it up to obtain family of models, called EfficientNets. This kind of ConvNets' design method is more automatic and accuracy in the feature. What is model scaling meaning? Model scaling is something that develops a fixed resource budget, basic module, and then scales them up for better accuracy, like ResNet-101 et al.
 
@@ -20,7 +19,7 @@ The authors use neural architecture search  method to design a new baseline netw
 1. Since model scaling does not change layer operators in baseline network, having a good baseline network is also critical. So the authors design a new mobile-size baseline, called EfficientNet.
 2. The paper search to optimize FLOPS rather than latency since it is not targeting any specific hardware device.
 3. The main building block for the baseline network is [mobile inverted bottleneck](https://arxiv.org/pdf/1801.04381.pdf) MBConv coming from MobileNet. Table 1 tells us the architecture of baseline network called EfficientNet-B0.
-4. How to scale EfficientNet? The authors define the scale factor of depth, width, and resolution for  ConvNet are alpha<sup>N</sup>, beta<sup></sup>, gamma<sup></sup> respectively. And alpha, beta, gamma are constrained to that `alpha * beta * beta * gamma * gamma` approximates to 2, and alpha, beta, gamma are must bigger than 1 or equal to 1.
+4. How to scale EfficientNet? The authors define the scale factor of depth, width, and resolution for  ConvNet are alpha<sup>N</sup>, beta<sup>N</sup>, gamma<sup>N</sup> respectively. And alpha, beta, gamma are constrained to that `alpha * beta * beta * gamma * gamma` approximates to 2, and alpha, beta, gamma are must bigger than 1 or equal to 1.
 5. **compound scaling method**: 
 - step 1 is fix `N=1`, and use grid search to get the optimized alpha, beta, gamma. In baseline network EfficientNet-B0, the best values are alpha=1.2, beta=1.1, gamma=1.15.
 - Step 2 is fix alpha, beta, gamma, scale up baseline network with different `N`.
