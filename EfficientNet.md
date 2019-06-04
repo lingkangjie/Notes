@@ -24,7 +24,7 @@ The authors use neural architecture search  method to design a new baseline netw
 - step 1 is fix `N=1`, and use grid search to get the optimized alpha, beta, gamma. In baseline network EfficientNet-B0, the best values are alpha=1.2, beta=1.1, gamma=1.15.
 - Step 2 is fix alpha, beta, gamma, scale up baseline network with different `N`.
 
-In the paper, authors use EfficientNet-B0 with alpha=1.2, beta=1.1, gamma=1.15 as the best case of baseline and scale the network up with different `N`. Notice the final depth, width and resolution size for a network are alpha<sup>N</sup>, beta<sup></sup>, gamma<sup></sup> respectively.
+In the paper, authors use EfficientNet-B0 with alpha=1.2, beta=1.1, gamma=1.15 as the best case of baseline and scale the network up with different `N`. Notice the final depth, width and resolution size for a network are alpha<sup>N</sup>, beta<sup>N</sup>, gamma<sup>N</sup> respectively.
 
 6. At last, the EfficientNet achieve new state-of-the-art accuracy for 5 out of 8 datasets, with 9.6x fewer parameters on average. I notice that the results coming from EfficientNet are very approximate to other state-of-the-art models, meaning that of course EfficientNet is the best with less FLOPS also.
 7. The paper also compares the scale only one dimension of network (by depth, by width, or by resolution) and its **compound scale** method, the result shows that its method can further improve accuracy. The model with compound scaling tends to focus on more relevant regions with more object details, while other models are either lack of object details or unable capture all objects in the images.
