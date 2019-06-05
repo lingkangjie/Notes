@@ -60,5 +60,42 @@ years: --2001-...-2010--2011--2012--2013---2014---2015---2016---2017---2018---20
    - Pros of T3: simple, easy. Cons of T3: the localization may not be accurate enough especially for some small objects (T4 has latter solved this problem).
    - Multi-reference/Multi-resolution detection. The main idea of T4 is to pre-define a set of reference boxes (anchor boxes) with different sizes and aspect-ratios at different locations of an image, and then predict the detection box based on these reference. T5 is a technique to detect objects of different scales at different layers of the network. T5 Detects larger objects in deeper layers and smaller ones in shallower layers.
 
-- Technical evolution of bounding box regression.
+- Technical evolution of bounding box regression. BB aims to refine the location of a predicted bounding box based on the initial proposal or the anchor box.
+```
+T1: without bounding box regression(VJ Det., HOG, etc.)
+T2: from bounding box to bounding box (DPM)
+T3: from feature to bounding box (SPPNet, Fast RCNN, Faster RCNN, YOLO, SSD, FPN, RetinaNet, TridentNet, etc.)
 
+years: --2001-........--2008----------------------2013---2016---2017---2018---2019
+          ---- T1 ------->|
+                          |<------ T2------------->|
+                                                   |<--------- T3 ----------------
+```
+- Technical evolution of context priming. Visual objects are usually embedded in a typical context with the surrounding environments. We use the associations among objects and environments to perform object detection. This kind of method called context priming. 
+   - Detection with local context. Some researchers found that by incorporating a small amount of background information improves the accuracy of pedestrian detection early in 2005. 
+   - Detection with global context. The first way is to take advantage of large receptive field (even larger than the input image) or global pooling operation of a CNN feature. The second way is to think of the global context as a kind of sequential information such as in video, and learn it with recurrent neural networks.
+   - Context interactive. Context interactive refers to the piece of information that conveys by the interactions of visual elements, such as the constrains and dependencies.
+- Technical evolution of non-maximum suppression. NMS has been gradually developed into three groups of methods:
+  - traditional greedy selection ( DPM, RCNN, Fast RCNN, Faster RCNN, YOLO, SSD, FPN, RetinaNet etc.): for a set of overlapped detections, the bounding box with the maximum detection score is selected while its neighoring boxes are removed according to a predefined overlap threshold (say, 0.5). Cons of this method: the top-scoring box may not be the best fit, it may suppress nearby objects, it does not suppress false positives.
+  - bounding box aggregation: takes full consideration of object relationships and their spatial layout.
+  - learning to NMS: think of NMS as a filter to re-score all raw detections and to train the NMS as part of a network in an end-to-end fashion.
+
+![evolution of non-max suppresion](./imgs/NMS.jpg)
+
+- Technical evolution of hard negative mining (HNM). In real scene of object detection, the imbalance between backgrounds and objects could be as extreme as 10<sup>4</sup> ~ 10<sup>5</sup> background windows to every object. HNM aims to deal with the problem of imbalanced data during training.
+  - Bootstrap. Bootstrap in object detection refers to a group of training techniques in which the training starts with a small part of background samples and then iteratively add new misclassified backgrounds during the training process.
+  - balance the weights between the positive and negative windows. However, this kind of method cannot completely solve the imbalanced data problem.
+  - design new loss functions, put more focus on hard, misclassified examples.
+
+### Acceleration of object detection
+- Level 1: speed up of numerical computations (integral image, FFT, vector quantization, reduced rank approx)
+- Level 2: speed up of detector engine (network pruning and quantification, lightweight network design)
+- Level 3: speed up of detection pipeline (feature map shared computation, speed up of classifier, cascaded detection)
+
+#### feature map shared computation
+Compute the feature map of the whole image only once before sliding window on it, such as how HOG feature map comes. Another example coming from CNN, weight sharing. Scale computational redundancy, directly scale the features rather than the images.
+
+#### speed up of classifiers
+Linear classifiers are low computational complexity, while kernel-based SVM has higher accuracy. Use reduced Set Vectors, piece-wise linear approximation for decision boundary, sparse encoding to speed up traditional SVM.
+
+#### cascaded detection
