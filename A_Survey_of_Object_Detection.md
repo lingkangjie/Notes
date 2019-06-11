@@ -118,3 +118,33 @@ It takes a coarse to fine detection philosophy: to filter out most of the simple
 - reduced rank approximation. It aims to make a low-rank decomposition of the matrix W: W approximates to U matrix times sigma matrix times V matrix.
 
 ### recent advances in object detection
+- detection with better engines. Using better backbone networks: AlexNet, VGG, GoogleNet, ResNet, DenseNet, SENet (Squeeze and Excitation Networks), MobileNet etc.
+- detection with better features. Feature fusion and learning high-resolution features with large receptive fields. Bottom-up fusion feeds forward shallow features to deeper layers via skip connections, while top-down fusion feeds back the features of deeper layers into the shallower ones. An advantages of element-wise product is that it can be used to suppress or highlight the features within a certain area, which may further benefit small object detection. Larger receptive filed is able to capture a larger scale of context information.
+![feature fusion](./imgs/features_fusion.jpg)
+
+- improvements of localization. Bounding box refinement, designing new loss functions for accurate localization.
+- Learning with segmentation can improve detection. Why? Segmentation helps category recognition, helps accurate localization, can be embedded as context.
+- Rotation robust detection. Using data augmentation, training independent detector for every orientation, using rotation invariant loss function, rotation calibration, rotation RoI pooling.
+- Scale robust detection. Using scale adaptive training for different scale level of input image, using scale adaptive detection to avoid fixed size configurations of anchors.
+- Training from scratch. Some research indicates that ImageNet Pre-training may speed up convergence, but does not necessarily provide regularization or improve final detection accuracy.
+- Using Generative Adversarial Networks (GAN) for improving the detection of small and occluded object.
+
+### Applications
+- Pedestrian detection. Difficulties and challenges: small pedestrian, hard negative (some backgrounds in street view images are very similar to pedestrians), dense and occluded pedestrians, real-time detection.
+- Face detection. Difficulties and challenges: Inter-class variation (A person may presents a variety of expressions, skin colors, poses, and movements), occlusion, multi-scale detection, real-time detection.
+- Text detection. Difficulties and challenges: 
+   - different fonts, colors and languages.
+   - text rotation and perspective distortion.
+   - densely arranged text localization.
+   - broken and blurred characters.
+- Traffic sign and traffic light detection. Difficulties and challenges: illumination changes (driving into the sun glare or at night), motion blur, bad weather, real-time detection.
+- Remote sensing target detection. Difficulties and challenges: detection in big data, occluded targets (over 50% of the earth's surface is covered by cloud every day), domain adaptation (remote sensing images captured by different sensors).
+
+### Future
+- Lightweight object detection
+- Detection with AutoML
+- Detection with domain adaptation
+- Weakly supervised detection
+- Small object detection
+- detection in videos
+- Detection with information fusion, e.g., RGB-D image, 3D point cloud, drone applications.
