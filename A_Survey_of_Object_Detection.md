@@ -146,5 +146,5 @@ It takes a coarse to fine detection philosophy: to filter out most of the simple
 - Detection with domain adaptation
 - Weakly supervised detection
 - Small object detection
-- detection in videos
+- Detection in videos
 - Detection with information fusion, e.g., RGB-D image, 3D point cloud, drone applications.
