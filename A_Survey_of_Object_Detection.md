@@ -99,3 +99,22 @@ Compute the feature map of the whole image only once before sliding window on it
 Linear classifiers are low computational complexity, while kernel-based SVM has higher accuracy. Use reduced Set Vectors, piece-wise linear approximation for decision boundary, sparse encoding to speed up traditional SVM.
 
 #### cascaded detection
+It takes a coarse to fine detection philosophy: to filter out most of the simple background windows using simple calculations, then to process those more difficult windows with complex ones.
+
+#### network pruning and quantification
+- Network pruning. Take an iterative training and pruning process to remove only a small group of unimportant weights after each stage of training.
+- Network quantification. Convert floating-point operation to AND, OR, NOT logical operations. Network binarization.
+- Network distillation. Use a large network called teacher net to train/conduct a small one called student net.
+#### Lightweight network design. 
+- Factorizing convolutions, (factorize convolutional filters): factorize a 7\*7 filter into three 3\*3 filters, factorize a k\*k filter into a k\*1 filter and a 1\*k filter. (factorizing convolutional channels). 
+- Group convolution. Depth-wise separable convolution. 
+- Bottle-neck design, a bottleneck layer is a neural network contains few nodes compared to the previous layers. 
+- Neural architecture search
+
+#### Numerical acceleration
+- speed up with integral image. It helps to rapidly calculate summations over image sub-regions, e,g, from HOG map to integral HOG map.
+- speed up with frequency domain. Use fast Fourier transform and inverse fast Fourier transform.
+- vector quantization. It aims to approximate the distribution of a large group of data by a small set of prototype vectors.
+- reduced rank approximation. It aims to make a low-rank decomposition of the matrix W: W approximates to U matrix times sigma matrix times V matrix.
+
+### recent advances in object detection
